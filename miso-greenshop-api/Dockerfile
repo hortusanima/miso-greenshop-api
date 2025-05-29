@@ -15,9 +15,13 @@ COPY ["miso-greenshop-api/miso-greenshop-api.csproj", "miso-greenshop-api/"]
 RUN dotnet restore "miso-greenshop-api/miso-greenshop-api.csproj"
 WORKDIR "/src/miso-greenshop-api"
 COPY . .
+RUN dotnet build "miso-greenshop-api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+FROM build AS builder
+ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "miso-greenshop-api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=builder /app/publish .
 ENTRYPOINT ["dotnet", "miso-greenshop-api.dll"]
