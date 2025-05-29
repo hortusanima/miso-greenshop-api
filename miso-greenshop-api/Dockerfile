@@ -11,7 +11,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["miso-greenshop-api.csproj", "miso-greenshop-api/"]
+COPY ["miso-greenshop-api/miso-greenshop-api.csproj", "miso-greenshop-api/"]
 RUN dotnet restore "miso-greenshop-api/miso-greenshop-api.csproj"
 WORKDIR "/src/miso-greenshop-api"
 COPY . .
