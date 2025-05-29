@@ -9,10 +9,12 @@ namespace miso_greenshop_api.Infrastructure.Services
     {
         private readonly PermissionControlOptions _permissionControlOptions = 
             permissionControlOptions.Value;
+        private readonly ILogger<IPermissionControlService> _logger;
         public bool VerifyApplication(string applicationKey)
         {
-            Console.WriteLine(_permissionControlOptions.ApplicationKey);
-            if(applicationKey == 
+            _logger.LogInformation(_permissionControlOptions.ApplicationKey);
+            _logger.LogInformation(applicationKey);
+            if (applicationKey == 
                 _permissionControlOptions.ApplicationKey)
             {
                 return true;
