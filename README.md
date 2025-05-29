@@ -44,14 +44,17 @@ Full API documentation is available via Swagger/OpenAPI at /swagger/index.html w
 - SMTP credentials for email notifications
 - JWT secret, application key and admin key
 ### Setup
-1. Clone the repository: link
-2. Configure environment variables
+1. Clone the repository
+```bash
+gh repo clone hortusanima/miso-greenshop-api
+```
+3. Configure environment variables
     - Database connection string (_ConnectionStrings:MisoGreenshopManagement_)
     - JWT secret (_Jwt:SecurityKey_)
     - SMTP credentials (_Smtp:Server_, _Smtp:Username_, _Smtp:Password_, _Smtp:Port_, _Smtp:EnableSsl_)
     - Application Key (_PermissionControl:ApplicationKey_)
     - Admin Key (_PermissionControl:AdminKey_)
-3. Apply database migrations
+4. Apply database migrations
 ```bash
 dotnet ef database update
 ```
