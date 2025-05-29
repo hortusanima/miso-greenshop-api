@@ -11,6 +11,7 @@ namespace miso_greenshop_api.Infrastructure.Services
             permissionControlOptions.Value;
         public bool VerifyApplication(string applicationKey)
         {
+            Console.WriteLine(_permissionControlOptions.ApplicationKey);
             if(applicationKey == 
                 _permissionControlOptions.ApplicationKey)
             {
