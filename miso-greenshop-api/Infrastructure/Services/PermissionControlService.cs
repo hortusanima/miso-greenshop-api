@@ -4,16 +4,17 @@ using Microsoft.Extensions.Options;
 
 namespace miso_greenshop_api.Infrastructure.Services
 {
-    public class PermissionControlService(IOptions<PermissionControlOptions> permissionControlOptions) 
+    public class PermissionControlService(IOptions<PermissionControlOptions> permissionControlOptions, ILogger<PermissionControlService> logger) 
         : IPermissionControlService
     {
         private readonly PermissionControlOptions _permissionControlOptions = 
             permissionControlOptions.Value;
-        private readonly ILogger<IPermissionControlService>? _logger;
+        private readonly ILogger<PermissionControlService> _logger = logger;
+
         public bool VerifyApplication(string applicationKey)
         {
-            _logger.LogInformation(_permissionControlOptions.ApplicationKey);
-            _logger.LogInformation(applicationKey);
+            _logger.LogInformation($"Env:{_permissionControlOptions.ApplicationKey}");
+            _logger.LogInformation($"Request:{applicationKey}");
             if (applicationKey == 
                 _permissionControlOptions.ApplicationKey)
             {
