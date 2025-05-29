@@ -9,7 +9,7 @@ namespace miso_greenshop_api.Infrastructure.Services
     {
         private readonly PermissionControlOptions _permissionControlOptions = 
             permissionControlOptions.Value;
-        private readonly ILogger<IPermissionControlService> _logger;
+        private readonly ILogger<IPermissionControlService>? _logger;
         public bool VerifyApplication(string applicationKey)
         {
             _logger.LogInformation(_permissionControlOptions.ApplicationKey);
