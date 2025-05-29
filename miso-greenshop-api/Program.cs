@@ -23,7 +23,7 @@ var builder = WebApplication
     .CreateBuilder(args);
 
 var connectionString = builder.Configuration
-    .GetConnectionString("GreenshopManagement");
+    .GetConnectionString("MisoGreenshopManagement");
 
 builder.Services
     .AddDbContext<ApplicationDbContext>(options =>
@@ -44,14 +44,7 @@ builder.Services
     {
         options.AddPolicy("DefaultPolicy", policy =>
             policy.WithOrigins(
-                "https://localhost:5173",
-                "https://localhost:3000",
-                "https://127.0.0.1:5173",
-                "https://127.0.0.1:3000",
-                "http://localhost:5173", 
-                "http://localhost:3000",
-                "http://127.0.0.1:5173",
-                "http://127.0.0.1:3000")
+                "")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .SetIsOriginAllowedToAllowWildcardSubdomains()
@@ -59,14 +52,7 @@ builder.Services
         );
         options.AddPolicy("WithCredentialsPolicy", policy =>
            policy.WithOrigins(
-               "https://localhost:5173",
-               "https://localhost:3000",
-               "https://127.0.0.1:5173",
-               "https://127.0.0.1:3000",
-               "http://localhost:5173",
-               "http://localhost:3000",
-               "http://127.0.0.1:5173",
-               "http://127.0.0.1:3000")
+               "")
            .AllowAnyMethod()
            .AllowAnyHeader()
            .AllowCredentials()
@@ -179,10 +165,10 @@ builder.Services
     .GetSection("PermissionControl"));
 builder.Services
     .Configure<JwtOptions>(builder.Configuration
-    .GetSection("JWT"));
+    .GetSection("Jwt"));
 builder.Services
     .Configure<SmtpOptions>(builder.Configuration
-    .GetSection("SMTP"));
+    .GetSection("Smtp"));
 
 builder.Services
     .AddSmtpClient();

@@ -25,7 +25,7 @@ namespace miso_greenshop_api.Controllers
 
         [HttpGet]
         [EnableRateLimiting("SlidingWindowIpAddressLimiter")]
-        [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
+        [TypeFilter(typeof(ValidateAdminKeyActionFilter))]
         public async Task<IActionResult> GetSubscribers()
         {
             var subscriberDtos = await _mediator.Send(
@@ -58,7 +58,7 @@ namespace miso_greenshop_api.Controllers
 
         [HttpDelete("{subscriberEmail}")]
         [EnableRateLimiting("SlidingWindowIpAddressRestrictLimiter")]
-        [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
+        [TypeFilter(typeof(ValidateAdminKeyActionFilter))]
         [TypeFilter(typeof(Subscriber_ValidateSubscriberEmailActionFilter))]
         public async Task<IActionResult> DeleteSubscriber([FromRoute]string subscriberEmail)
         {
