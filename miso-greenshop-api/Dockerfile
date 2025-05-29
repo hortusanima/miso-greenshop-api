@@ -11,17 +11,17 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["greenshop-api.csproj", "greenshop-api/"]
-RUN dotnet restore "greenshop-api/greenshop-api.csproj"
-WORKDIR "/src/greenshop-api"
+COPY ["miso-greenshop-api.csproj", "miso-greenshop-api/"]
+RUN dotnet restore "miso-greenshop-api/miso-greenshop-api.csproj"
+WORKDIR "/src/miso-greenshop-api"
 COPY . .
-RUN dotnet build "greenshop-api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "miso-greenshop-api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "greenshop-api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "miso-greenshop-api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "greenshop-api.dll"]
+ENTRYPOINT ["dotnet", "miso-greenshop-api.dll"]
