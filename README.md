@@ -37,7 +37,7 @@ This structure follows Clean Architecture principles, ensuring separation of con
 - **Carts:** POST /carts (authentication required), PUT /carts (authentication required)
 - **CartItems:** POST /cartitems (authentication required), DELETE /cartitems (authentication required)
 
-Full API documentation is available via Swagger/OpenAPI at /swagger/index.html when running the service. Endpoints that do not required admin key still require application key (security reasons).
+Full API documentation is available via Swagger/OpenAPI at /swagger/index.html when running the service. Endpoints that do not require admin key still require application key (security reasons).
 
 ## Getting started
 ### Prerequisites
