@@ -25,7 +25,8 @@ Miso Greenshop is a mock online plant shop application. This repository contains
 - **Domain:** Core entities, model validations and interfaces
 - **Application:** Application specific models, queries, commands, handlers and mapping profiles
 - **Infrastructure:** Data access (Entity Framework Core), database configuration, migrations and interface implementations
-- **Web API**: API endpoints (controllers), data transfer objects (DTOs) and other properties
+- **Web API**: API endpoints (controllers), data transfer objects (DTOs), action and exception filters and properties
+
 This structure follows Clean Architecture principles, ensuring separation of concerns, testability, and independence from frameworks and databases.
 
 ## API Overview
@@ -35,6 +36,7 @@ This structure follows Clean Architecture principles, ensuring separation of con
 - **Reviews:** GET /reviews/{plantId}, GET /reviews/{plantId}/user (authentication required), GET /reviews/{plantId}/total-number, GET /reviews/{plantId}/rating-number, POST /reviews (authentication required), PUT /reviews (authentication required), DELETE /reviews (authentication required)
 - **Carts:** POST /carts (authentication required), PUT /carts (authentication required)
 - **CartItems:** POST /cartitems (authentication required), DELETE /cartitems (authentication required)
+
 Full API documentation is available via Swagger/OpenAPI at /swagger/index.html when running the service. Endpoints that do not required admin key still require application key (security reasons).
 
 ## Getting started
