@@ -44,7 +44,7 @@ builder.Services
     {
         options.AddPolicy("DefaultPolicy", policy =>
             policy.WithOrigins(
-                "")
+                "https://localhost:5173")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .SetIsOriginAllowedToAllowWildcardSubdomains()
@@ -52,7 +52,7 @@ builder.Services
         );
         options.AddPolicy("WithCredentialsPolicy", policy =>
            policy.WithOrigins(
-               "")
+               "https://localhost:5173")
            .AllowAnyMethod()
            .AllowAnyHeader()
            .AllowCredentials()

@@ -13,8 +13,6 @@ namespace miso_greenshop_api.Infrastructure.Services
 
         public bool VerifyApplication(string applicationKey)
         {
-            _logger.LogInformation($"Env:{_permissionControlOptions.ApplicationKey}");
-            _logger.LogInformation($"Request:{applicationKey}");
             if (applicationKey == 
                 _permissionControlOptions.ApplicationKey)
             {
