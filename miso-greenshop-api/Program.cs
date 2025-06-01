@@ -39,40 +39,22 @@ builder.Services
 
 builder.Services
     .AddCors(options =>
-{
-    if (builder.Environment.IsDevelopment())
     {
-        options.AddPolicy("DefaultPolicy", policy =>
-            policy.WithOrigins(
-                "https://localhost:5173",
-                "https://localhost:3000",
-                "https://127.0.0.1:5173",
-                "https://127.0.0.1:3000",
-                "http://localhost:5173",
-                "http://localhost:3000",
-                "http://127.0.0.1:5173",
-                "http://127.0.0.1:3000")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .SetIsOriginAllowedToAllowWildcardSubdomains()
-            .AllowCredentials()
-        );
-        options.AddPolicy("WithCredentialsPolicy", policy =>
-           policy.WithOrigins(
-               "https://localhost:5173",
-                "https://localhost:3000",
-                "https://127.0.0.1:5173",
-                "https://127.0.0.1:3000",
-                "http://localhost:5173",
-                "http://localhost:3000",
-                "http://127.0.0.1:5173",
-                "http://127.0.0.1:3000")
-           .AllowAnyMethod()
-           .AllowAnyHeader()
-           .AllowCredentials()
-        );
-    }
-});
+    options.AddPolicy("DefaultPolicy", policy =>
+        policy.WithOrigins(
+            "https://localhost:5173")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .SetIsOriginAllowedToAllowWildcardSubdomains()
+        .AllowCredentials()
+    );
+    options.AddPolicy("WithCredentialsPolicy", policy =>
+        policy.WithOrigins(
+            "https://localhost:5173")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials());
+    });
 
 builder.Services
     .AddAutoMapper(
