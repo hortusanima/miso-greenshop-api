@@ -127,7 +127,7 @@ builder.Services
                 TokensPerPeriod = 1,
                 ReplenishmentPeriod = TimeSpan.FromSeconds(5),
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 2
+                QueueLimit = 0
             }
         )
     );
