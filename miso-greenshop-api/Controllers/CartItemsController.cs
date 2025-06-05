@@ -6,7 +6,6 @@ using miso_greenshop_api.Filters.ActionFilters.General;
 using miso_greenshop_api.Filters.ActionFilters.Plant_ActionFilters;
 using miso_greenshop_api.Filters.ActionFilters.User_ActionFilters;
 using MediatR;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 
@@ -21,6 +20,7 @@ namespace miso_greenshop_api.Controllers
             mediator;
 
         [HttpPost]
+        [EnableRateLimiting("TokenBucketIpAddressLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
         [TypeFilter(typeof(Cart_ValidateCartExistsActionFilter))]
@@ -37,6 +37,7 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpDelete("{plantId}")]
+        [EnableRateLimiting("TokenBucketIpAddressLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
         [TypeFilter(typeof(Plant_ValidatePlantIdActionFilter))]

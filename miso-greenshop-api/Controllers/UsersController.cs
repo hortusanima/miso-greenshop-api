@@ -7,7 +7,6 @@ using miso_greenshop_api.Filters.ActionFilters.General;
 using miso_greenshop_api.Filters.ActionFilters.User_ActionFilters;
 using miso_greenshop_api.Filters.ExceptionFilters.User_ExceptionFilters;
 using MediatR;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 

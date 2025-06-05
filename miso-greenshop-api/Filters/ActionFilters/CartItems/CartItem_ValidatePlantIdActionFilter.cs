@@ -21,7 +21,7 @@ namespace miso_greenshop_api.Filters.ActionFilters.CartItems_ActionFilters
         {
             var cartItem = context
                 .ActionArguments["cartItem"] as CartItemDto;
-            var plant = _plantsRepository
+            var plant = await _plantsRepository
                 .GetPlantByIdAsync(cartItem!.PlantId!);
 
             if(plant == null)

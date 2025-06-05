@@ -60,7 +60,11 @@ builder.Services
     .AddHttpContextAccessor();
 
 builder.Services
-    .AddControllers()
+    .AddControllers(options =>
+    {
+        options.Filters
+            .Add(typeof(HandleServerErrorExceptionFilter));
+    })
     .AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.ReferenceLoopHandling = 
@@ -132,7 +136,7 @@ builder.Services
                 TokensPerPeriod = 1,
                 ReplenishmentPeriod = TimeSpan.FromSeconds(10),
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
+                QueueLimit = 2
             }
         )
     );
@@ -223,11 +227,6 @@ else
 {
     app.UseHsts();
 }
-
-app.UseForwardedHeaders(new ForwardedHeadersOptions
-{
-    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-});
 
 app.UseRouting();
 
