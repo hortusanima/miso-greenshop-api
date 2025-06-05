@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using System.Threading.RateLimiting;
+using miso_greenshop_api.Filters.ExceptionFilters.General;
 
 var builder = WebApplication
     .CreateBuilder(args);
@@ -65,7 +66,11 @@ builder.Services
     .AddHttpContextAccessor();
 
 builder.Services
-    .AddControllers()
+    .AddControllers(options =>
+    {
+        options.Filters
+            .Add(typeof(HandleServerErrorExceptionFilter));
+    })
     .AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.ReferenceLoopHandling = 
