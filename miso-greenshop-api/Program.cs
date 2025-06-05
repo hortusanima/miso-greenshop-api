@@ -19,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using System.Threading.RateLimiting;
 using miso_greenshop_api.Filters.ExceptionFilters.General;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication
     .CreateBuilder(args);
@@ -43,7 +44,8 @@ builder.Services
     {
     options.AddPolicy("DefaultPolicy", policy =>
         policy.WithOrigins(
-            "https://localhost:5173")
+            "https://localhost:5173",
+            "https://miso-greenshop-api.onrender.com")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());
@@ -221,6 +223,11 @@ else
 {
     app.UseHsts();
 }
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
 app.UseRouting();
 
