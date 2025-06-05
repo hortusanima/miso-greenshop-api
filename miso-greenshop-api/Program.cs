@@ -46,7 +46,6 @@ builder.Services
             "https://localhost:5173")
         .AllowAnyMethod()
         .AllowAnyHeader()
-        .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowCredentials()
     );
     options.AddPolicy("WithCredentialsPolicy", policy =>
