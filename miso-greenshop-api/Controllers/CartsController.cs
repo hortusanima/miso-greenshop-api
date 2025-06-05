@@ -27,7 +27,6 @@ namespace miso_greenshop_api.Controllers
             mediator;
 
         [HttpPost]
-        [EnableCors("WithCredentialsPolicy")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
         [TypeFilter(typeof(Cart_ValidatePlantIdsActionFilter))]
@@ -44,7 +43,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpPut]
-        [EnableCors("WithCredentialsPolicy")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
         [TypeFilter(typeof(Cart_ValidateCartExistsActionFilter))]

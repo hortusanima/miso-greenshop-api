@@ -43,7 +43,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpGet("{plantId}/user")]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("SlidingWindowIpAddressLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(Plant_ValidatePlantIdActionFilter))]
@@ -95,7 +94,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpPost]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("SlidingWindowIpAddressRestrictLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
@@ -112,7 +110,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpPut("{plantId}")]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("SlidingWindowIpAddressRestrictLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(Plant_ValidatePlantIdActionFilter))]
@@ -135,7 +132,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpDelete("{plantId}")]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("SlidingWindowIpAddressRestrictLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(Plant_ValidatePlantIdActionFilter))]

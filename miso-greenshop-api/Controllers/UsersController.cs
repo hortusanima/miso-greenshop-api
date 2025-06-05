@@ -61,7 +61,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpPost("login")]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("TokenBucketIpAddressRestrictLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateLoginUserActionFilter))]
@@ -90,7 +89,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpPost("logout")]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("SlidingWindowIpAddressRestrictLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         public async Task<IActionResult> Logout()
@@ -102,7 +100,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpGet]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("SlidingWindowIpAddressRestrictLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
@@ -115,7 +112,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpPut("{isSubscribed}")]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("TokenBucketIpAddressRestrictLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
@@ -132,7 +128,6 @@ namespace miso_greenshop_api.Controllers
         }
 
         [HttpDelete]
-        [EnableCors("WithCredentialsPolicy")]
         [EnableRateLimiting("TokenBucketIpAddressRestrictLimiter")]
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]

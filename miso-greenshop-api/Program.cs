@@ -46,13 +46,6 @@ builder.Services
             "https://localhost:5173")
         .AllowAnyMethod()
         .AllowAnyHeader()
-        .AllowCredentials()
-    );
-    options.AddPolicy("WithCredentialsPolicy", policy =>
-        policy.WithOrigins(
-            "https://localhost:5173")
-        .AllowAnyMethod()
-        .AllowAnyHeader()
         .AllowCredentials());
     });
 
