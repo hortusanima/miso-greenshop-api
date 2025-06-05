@@ -50,7 +50,7 @@ Full API documentation is available via Swagger/OpenAPI at /swagger/index.html w
 ```bash
 gh repo clone hortusanima/miso-greenshop-api
 ```
-3. Configure environment variables
+3. Configure environment variables (e.g. through appsettings.json)
     - Database connection string (_ConnectionStrings:MisoGreenshopManagement_)
     - JWT secret (_Jwt:SecurityKey_)
     - SMTP credentials (_Smtp:Server_, _Smtp:Username_, _Smtp:Password_, _Smtp:Port_, _Smtp:EnableSsl_)
