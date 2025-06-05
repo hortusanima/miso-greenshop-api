@@ -66,11 +66,7 @@ builder.Services
     .AddHttpContextAccessor();
 
 builder.Services
-    .AddControllers(options =>
-    {
-        options.Filters
-            .Add(typeof(HandleServerErrorExceptionFilter));
-    })
+    .AddControllers()
     .AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.ReferenceLoopHandling = 
