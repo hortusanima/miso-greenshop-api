@@ -4,6 +4,7 @@ using miso_greenshop_api.Domain.Interfaces.Jwt;
 using miso_greenshop_api.Domain.Interfaces.Repositories;
 using miso_greenshop_api.Domain.Models;
 using MediatR;
+using miso_greenshop_api.Dtos.Carts;
 
 namespace miso_greenshop_api.Application.Handlers.CartItems
 {
@@ -14,7 +15,7 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
         IJwtService jwtService,
         IHttpContextAccessor httpContextAccessor,
         IMapper mapper) : 
-        IRequestHandler<AddCardItemCommand, Unit>
+        IRequestHandler<AddCardItemCommand, CartDto>
     {
         private readonly ICartsRepository _cartsRepository = 
             cartsRepository;
@@ -28,7 +29,7 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
             httpContextAccessor;
         private readonly IMapper _mapper = 
             mapper;
-        public async Task<Unit> Handle(
+        public async Task<CartDto> Handle(
             AddCardItemCommand request, 
             CancellationToken cancellationToken)
         {
@@ -42,9 +43,6 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
             var cart = await _cartsRepository
                 .GetCartByUserIdAsync(userId);
 
-            var plant = await _plantsRepository
-                .GetPlantByIdAsync(request.CartItem!.PlantId!);
-
             var cartItemToAdd = _mapper
                 .Map<CartItem>(
                 request.CartItem,
@@ -52,15 +50,11 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
 
             var existingCartItem = await _cartItemsRepository
                 .GetCartItemByIdsAsync(
-                cart!.CartId!, 
-                plant!.PlantId!);
-
-            double cartPrice = cart.CartPrice;
+                cart!.CartId!,
+                cartItemToAdd.PlantId!);
 
             if (existingCartItem != null)
             {
-                cartPrice -= (double)plant!.Price! * 
-                    existingCartItem.Quantity;
                 await _cartItemsRepository
                     .UpdateCartItemQuantity(
                     existingCartItem, 
@@ -68,17 +62,46 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
             }
             else
             {
-                cart.CartItems!
-                    .Add(cartItemToAdd);
+                //cart.CartItems!
+                //    .Add(cartItemToAdd);
                 await _cartItemsRepository
                     .AddCartItem(cartItemToAdd);
             }
-            cartPrice += (double)plant!.Price! * 
-                cartItemToAdd.Quantity;
-            var result = await _cartsRepository
-                .UpdateCartPriceAsync(cart, cartPrice);
 
-            return Unit.Value;
+
+            double totalCartPrice = 0;
+            var addedCartItems = await _cartItemsRepository
+                .GetCartItemsByCartAsync(cart.CartId!);
+
+            var plantIds = addedCartItems
+                .Select(ci => ci.PlantId)
+                .ToList();
+
+            var plants = await _plantsRepository
+                .GetPlantsByIdsAsync(plantIds!);
+
+            foreach (var cartItem in addedCartItems)
+            {
+                if (plants.TryGetValue(
+                cartItem.PlantId!,
+                out var plant))
+                {
+                    totalCartPrice += (double)plant.Price! *
+                        cartItem.Quantity;
+                }
+            }
+            if (addedCartItems.Count == 0)
+            {
+                totalCartPrice = 0;
+            }
+
+            var result = await _cartsRepository
+                .UpdateCartPriceAsync(
+                cart,
+                totalCartPrice);
+
+            return _mapper
+    .           Map<CartDto>(result);
         }
     }
 }

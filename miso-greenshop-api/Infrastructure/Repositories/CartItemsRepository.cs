@@ -1,4 +1,5 @@
-﻿using miso_greenshop_api.Domain.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using miso_greenshop_api.Domain.Interfaces.Repositories;
 using miso_greenshop_api.Domain.Models;
 using miso_greenshop_api.Infrastructure.Persistance;
 
@@ -18,6 +19,13 @@ namespace miso_greenshop_api.Infrastructure.Repositories
                 .FindAsync(
                 cartId, 
                 plantId);
+        }
+
+        public async Task<List<CartItem>> GetCartItemsByCartAsync(string cartId)
+        {
+            return await _dbContext.CartItems!
+                .Where(p => p.CartId == cartId)
+                .ToListAsync();
         }
 
         public async Task AddCartItem(CartItem cartItem)

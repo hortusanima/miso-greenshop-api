@@ -61,7 +61,7 @@ namespace miso_greenshop_api.Controllers
 
         [HttpPost("login")]
         [EnableRateLimiting("TokenBucketIpAddressRestrictLimiter")]
-        [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
+        //[TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateLoginUserActionFilter))]
         public async Task<IActionResult> Login([FromBody]LoginDto loginDto)
         {

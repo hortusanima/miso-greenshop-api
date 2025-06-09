@@ -76,20 +76,8 @@ namespace miso_greenshop_api.Application.Handlers.Carts
                 request.CartItems, 
                 opt => opt.Items["CartId"] = cart.CartId);
 
-            var plantIds = request.CartItems!
-                .Select(ci => ci.PlantId)
-                .ToList();
-
-            var plants = await _plantsRepository
-                .GetPlantsByIdsAsync(plantIds!);
-
-            double cartPrice = cart.CartPrice;
-
             foreach (var cartItem in cartItemsToAdd)
             {
-                var plantPrice = (double)(plants!
-                    .GetValueOrDefault(cartItem.PlantId)!.Price)!;
- 
                 var existingCartItem = await _cartItemsRepository
                     .GetCartItemByIdsAsync(
                     cart.CartId!, 
@@ -97,8 +85,6 @@ namespace miso_greenshop_api.Application.Handlers.Carts
 
                 if (existingCartItem != null)
                 {
-                    cartPrice -= plantPrice * 
-                        existingCartItem.Quantity;
                     await _cartItemsRepository
                         .UpdateCartItemQuantity(
                         existingCartItem, 
@@ -109,14 +95,38 @@ namespace miso_greenshop_api.Application.Handlers.Carts
                     await _cartItemsRepository
                         .AddCartItem(cartItem);
                 }
-                cartPrice += plantPrice * 
-                    cartItem.Quantity;
+            }
+
+            double totalCartPrice = 0;
+            var addedCartItems = await _cartItemsRepository
+                .GetCartItemsByCartAsync(cart.CartId!);
+
+            var plantIds = addedCartItems
+                .Select(ci => ci.PlantId)
+                .ToList();
+
+            var plants = await _plantsRepository
+                .GetPlantsByIdsAsync(plantIds!);
+
+            foreach (var cartItem in addedCartItems)
+            {
+                if (plants.TryGetValue(
+                cartItem.PlantId!,
+                out var plant))
+                {
+                    totalCartPrice += (double)plant.Price! * 
+                        cartItem.Quantity;
+                }
+            }
+            if (addedCartItems.Count == 0)
+            {
+                totalCartPrice = 0;
             }
 
             var result = await _cartsRepository
                 .UpdateCartPriceAsync(
                 cart, 
-                cartPrice);
+                totalCartPrice);
 
             return _mapper
                 .Map<CartDto>(result);

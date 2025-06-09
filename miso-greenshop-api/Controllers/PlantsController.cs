@@ -27,7 +27,7 @@ namespace miso_greenshop_api.Controllers
 
         [HttpGet]
         [EnableRateLimiting("SlidingWindowIpAddressLimiter")]
-        [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
+        //[TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(Plant_ValidateGetHeadersActionFilter))]
         public async Task<IActionResult> GetPlants(
             [FromQuery] int page = 1,

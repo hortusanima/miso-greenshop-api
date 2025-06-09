@@ -27,7 +27,7 @@ namespace miso_greenshop_api.Controllers
 
         [HttpPost]
         [EnableRateLimiting("TokenBucketIpAddressLimiter")]
-        [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
+        //[TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
         [TypeFilter(typeof(Cart_ValidatePlantIdsActionFilter))]
         [TypeFilter(typeof(Cart_HandleUpdateCartExceptionFilter))]
@@ -44,7 +44,7 @@ namespace miso_greenshop_api.Controllers
 
         [HttpPut]
         [EnableRateLimiting("TokenBucketIpAddressLimiter")]
-        [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
+        //[TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(User_ValidateJwtTokenActionFilter))]
         [TypeFilter(typeof(Cart_ValidateCartExistsActionFilter))]
         [TypeFilter(typeof(Cart_HandleUpdateCartExceptionFilter))]

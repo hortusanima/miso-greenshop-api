@@ -7,6 +7,7 @@ namespace miso_greenshop_api.Domain.Interfaces.Repositories
         Task<CartItem?> GetCartItemByIdsAsync(
             string cartId, 
             string plantId);
+        Task<List<CartItem>> GetCartItemsByCartAsync(string cartId);
         Task AddCartItem(CartItem cartItem);
         Task UpdateCartItemQuantity(
             CartItem cartItem, 
