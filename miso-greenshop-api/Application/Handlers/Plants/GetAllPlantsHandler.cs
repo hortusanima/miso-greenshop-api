@@ -125,17 +125,6 @@ namespace miso_greenshop_api.Application.Handlers.Plants
                 .ToListAsync(cancellationToken: 
                 cancellationToken);
 
-            if (!request.Authorized)
-            {
-                plants.ForEach(p => p.Price = 
-                    Math.Truncate(100 * 
-                    (double)p.Price! / 
-                    (100 + p.Sale_Percent - 
-                    p.Sale_Percent_Private)) +
-                    0.99
-                );
-            }
-
             return new GetPlantsResponse
             {
                 Plants = plants,

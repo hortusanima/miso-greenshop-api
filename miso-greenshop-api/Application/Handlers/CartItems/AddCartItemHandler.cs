@@ -15,7 +15,7 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
         IJwtService jwtService,
         IHttpContextAccessor httpContextAccessor,
         IMapper mapper) : 
-        IRequestHandler<AddCardItemCommand, CartDto>
+        IRequestHandler<AddCardItemCommand, Unit>
     {
         private readonly ICartsRepository _cartsRepository = 
             cartsRepository;
@@ -29,7 +29,7 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
             httpContextAccessor;
         private readonly IMapper _mapper = 
             mapper;
-        public async Task<CartDto> Handle(
+        public async Task<Unit> Handle(
             AddCardItemCommand request, 
             CancellationToken cancellationToken)
         {
@@ -62,8 +62,6 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
             }
             else
             {
-                //cart.CartItems!
-                //    .Add(cartItemToAdd);
                 await _cartItemsRepository
                     .AddCartItem(cartItemToAdd);
             }
@@ -95,13 +93,12 @@ namespace miso_greenshop_api.Application.Handlers.CartItems
                 totalCartPrice = 0;
             }
 
-            var result = await _cartsRepository
+            await _cartsRepository
                 .UpdateCartPriceAsync(
                 cart,
                 totalCartPrice);
 
-            return _mapper
-    .           Map<CartDto>(result);
+            return Unit.Value;
         }
     }
 }
