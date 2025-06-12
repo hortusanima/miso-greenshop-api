@@ -30,7 +30,7 @@ namespace miso_greenshop_api.Application.Handlers.Plants
             {
                 var categoryRelatedProducts = otherPlants
                     .Where(p => p.Category == plant.Category)
-                    .Take(5)
+                    .Take(request.Count)
                     .ToList();
 
                 return _mapper

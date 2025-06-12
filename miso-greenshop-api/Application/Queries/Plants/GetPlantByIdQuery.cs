@@ -6,6 +6,5 @@ namespace miso_greenshop_api.Application.Queries.Plants
     public class GetPlantByIdQuery : IRequest<GetPlantDto>
     {
         public string? Id { get; set; }
-        public bool Authorized { get; set; } 
     }
 }

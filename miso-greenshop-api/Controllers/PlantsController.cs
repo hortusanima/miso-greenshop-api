@@ -100,14 +100,12 @@ namespace miso_greenshop_api.Controllers
         [TypeFilter(typeof(ValidateApplicationKeyActionFilter))]
         [TypeFilter(typeof(Plant_ValidatePlantIdActionFilter))]
         public async Task<IActionResult> GetPlantById(
-            string plantId,
-            [FromHeader(Name = "Authorized")] bool authorized = false)
+            string plantId)
         {
             var getPlantDto = await _mediator.Send(
             new GetPlantByIdQuery
             {
-                Id = plantId,
-                Authorized = authorized
+                Id = plantId
             });
 
             return Ok(getPlantDto);
