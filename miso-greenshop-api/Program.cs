@@ -45,6 +45,7 @@ builder.Services
     options.AddPolicy("DefaultPolicy", policy =>
         policy.WithOrigins(
             "https://calm-bublanina-ac79f6.netlify.app",
+            "https://localhost:5173",
             "https://miso-greenshop-api.onrender.com")
         .AllowAnyMethod()
         .AllowAnyHeader()
