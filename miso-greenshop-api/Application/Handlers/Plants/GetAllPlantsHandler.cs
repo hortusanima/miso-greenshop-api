@@ -59,8 +59,10 @@ namespace miso_greenshop_api.Application.Handlers.Plants
             if (!string.IsNullOrEmpty(request.Key))
             {
                 plantsQuery = plantsQuery
-                    .Where(p => p.Name != null && 
-                    p.Name.Contains(request.Key));
+                    .Where(p => p.Name != null && p.Name
+                    .ToLower()
+                    .Contains(request.Key
+                    .ToLower()));
             }
 
             if (!string.IsNullOrEmpty(request.Category))
