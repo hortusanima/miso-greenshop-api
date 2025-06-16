@@ -44,8 +44,7 @@ builder.Services
     {
     options.AddPolicy("DefaultPolicy", policy =>
         policy.WithOrigins(
-            "https://localhost:5173",
-            "https://snazzy-raindrop-0d6a03.netlify.app",
+            "https://calm-bublanina-ac79f6.netlify.app",
             "https://miso-greenshop-api.onrender.com")
         .AllowAnyMethod()
         .AllowAnyHeader()
