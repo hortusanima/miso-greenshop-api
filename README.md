@@ -19,7 +19,7 @@ Miso Greenshop is a mock online plant shop application. This repository contains
 - **Authentication:** JWT (Secure API access)
 - **Email:** System.Net.Mail, SMTP (Sending notifications and confirmations)
 - **Hosting:** Render (Cloud deployment)
-- **Client App:** React + TypeScript (link)
+- **Client App:** React + TypeScript (available here)
 
 ## Solution Structure
 - **Domain:** Core entities, model validations and interfaces
@@ -66,8 +66,8 @@ dotnet run
 ```
 5. Test via Postman, Swagger UI or other testing tool
 
-## Related projects
-- Frontend Client: link
+## Full application
+- Explore the live application [here](https://amazing-biscuit-7704bb.netlify.app/).
 
 ## Licence
 MIT Licence
