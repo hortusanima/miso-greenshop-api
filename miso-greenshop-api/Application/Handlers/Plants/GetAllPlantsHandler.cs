@@ -35,8 +35,7 @@ namespace miso_greenshop_api.Application.Handlers.Plants
                     StringComparison.OrdinalIgnoreCase))
                 {
                     plantsQuery = plantsQuery
-                        .OrderByDescending(p => p.Acquisition_Date)
-                        .Take(9);
+                        .OrderByDescending(p => p.Acquisition_Date);
                 }
                 else if (string.Equals(
                     request.Group, 
