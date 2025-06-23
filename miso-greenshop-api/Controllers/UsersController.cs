@@ -76,6 +76,7 @@ namespace miso_greenshop_api.Controllers
             jwt, 
             new CookieOptions
             {
+                Expires = DateTime.Now.AddDays(7),
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.None
