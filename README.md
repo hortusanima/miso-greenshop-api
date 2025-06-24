@@ -68,6 +68,8 @@ dotnet run
 
 ## Full application
 - Explore the live application [here](https://amazing-biscuit-7704bb.netlify.app/).
+### Important Note
+For optimal cookie setup functionality on mobile devices, please disable the 'Prevent Cross-Site Tracking' option (Safari) or third-party cookie blocking (Chrome and other browsers) in your browser settings.
 
 ## Licence
 MIT Licence
